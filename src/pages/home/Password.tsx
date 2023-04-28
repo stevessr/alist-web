@@ -51,7 +51,8 @@ const Password = () => {
             as={LinkWithBase}
             href={`/@login?redirect=${encodeURIComponent(location.pathname)}`}
           >
-            {t("global.go_login")}
+            /*{t("global.go_login")}*/
+            {t("你在干什么")}
           </Text>
         </Flex>
         <HStack spacing="$2">

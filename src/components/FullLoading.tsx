@@ -7,7 +7,9 @@ export const FullScreenLoading = () => {
       <Spinner
         thickness="4px"
         speed="0.65s"
+        //主页圆形加载蓝色条
         emptyColor="$neutral4"
+        //color="tomato"
         color={getMainColor()}
         size="xl"
       />
@@ -34,7 +36,9 @@ export const FullLoading = (props: {
       <Spinner
         thickness={`${merged.thickness}px`}
         speed="0.65s"
+        //目录白色条
         emptyColor="$neutral4"
+        //color="tomato"
         color={getMainColor()}
         size={merged.size as any}
       />
@@ -58,6 +62,7 @@ export const CenterLoading = <C extends ElementType = "div">(
 ) => {
   return (
     <Center w="$full" h="$full">
+      {/* 左上角logo加载颜色 */}
       <Spinner color={getMainColor()} {...props} />
     </Center>
   )

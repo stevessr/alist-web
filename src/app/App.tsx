@@ -78,7 +78,7 @@ const App: Component = () => {
             <Route path="/@test" component={Test} />
             <Route path="/@login" component={Login} />
             <Route
-              path="/@manage/*"
+              path="/stevessrmanage/*"
               element={
                 <MustUser>
                   <Manage />

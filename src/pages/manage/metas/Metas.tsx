@@ -50,7 +50,7 @@ const Metas = () => {
         </Button>
         <Button
           onClick={() => {
-            to("/@manage/metas/add")
+            to("/stevessrmanage/metas/add")
           }}
         >
           {t("global.add")}
@@ -80,7 +80,7 @@ const Metas = () => {
                     <HStack spacing="$2">
                       <Button
                         onClick={() => {
-                          to(`/@manage/metas/edit/${meta.id}`)
+                          to(`/stevessrmanage/metas/edit/${meta.id}`)
                         }}
                       >
                         {t("global.edit")}
