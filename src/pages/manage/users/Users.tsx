@@ -96,7 +96,7 @@ const Users = () => {
         </Button>
         <Button
           onClick={() => {
-            to("/stevessrmanage/users/add")
+            to("/@management/users/add")
           }}
         >
           {t("global.add")}
@@ -139,7 +139,7 @@ const Users = () => {
                     <HStack spacing="$2">
                       <Button
                         onClick={() => {
-                          to(`/stevessrmanage/users/edit/${user.id}`)
+                          to(`/@management/users/edit/${user.id}`)
                         }}
                       >
                         {t("global.edit")}

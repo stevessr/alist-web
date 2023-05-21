@@ -70,7 +70,7 @@ export const StorageC = (props: StorageProps) => {
       <HStack spacing="$2">
         <Button
           onClick={() => {
-            to(`/stevessrmanage/storages/edit/${props.storage.id}`)
+            to(`/@management/storages/edit/${props.storage.id}`)
           }}
         >
           {t("global.edit")}

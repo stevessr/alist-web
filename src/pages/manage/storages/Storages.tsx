@@ -86,7 +86,7 @@ const Storages = () => {
         </Button>
         <Button
           onClick={() => {
-            to("/stevessrmanage/storages/add")
+            to("/@management/storages/add")
           }}
         >
           {t("global.add")}
@@ -164,7 +164,7 @@ const Storages = () => {
                     <HStack spacing="$2">
                       <Button
                         onClick={() => {
-                          to(`/stevessrmanage/storages/edit/${storage.id}`)
+                          to(`/@management/storages/edit/${storage.id}`)
                         }}
                       >
                         {t("global.edit")}

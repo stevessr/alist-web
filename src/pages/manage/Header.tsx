@@ -54,7 +54,7 @@ const Header = () => {
             color="$info9"
             cursor="pointer"
             onClick={() => {
-              to("/stevessrmanage")
+              to("/@management")
             }}
           >
             {t("manage.title")}

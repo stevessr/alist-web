@@ -56,7 +56,7 @@ const get_routes = (items: SideMenuItem[], acc: Route[] = []) => {
       get_routes(item.children, acc)
     } else {
       acc.push({
-        to: trimLeft(item.to!, "/stevessrmanage"),
+        to: trimLeft(item.to!, "/@management"),
         component:
           item.component ||
           (() => <Placeholder title={item.title} to={item.to || "empty"} />),
