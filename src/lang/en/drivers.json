@@ -26,9 +26,8 @@
     "username": "Username"
   },
   "139Yun": {
-    "account": "Account",
+    "authorization": "Authorization",
     "cloud_id": "Cloud id",
-    "cookie": "Cookie",
     "root_folder_id": "Root folder id",
     "type": "Type",
     "types": {
@@ -157,6 +156,7 @@
   "BaiduNetdisk": {
     "client_id": "Client id",
     "client_secret": "Client secret",
+    "custom_crack_ua": "Custom crack ua",
     "download_api": "Download api",
     "download_apis": {
       "crack": "Crack",
@@ -338,6 +338,8 @@
   },
   "S3": {
     "access_key_id": "Access key id",
+    "add_filename_to_disposition": "Add filename to disposition",
+    "add_filename_to_disposition-tips": "Add filename to Content-Disposition header.",
     "bucket": "Bucket",
     "custom_host": "Custom host",
     "endpoint": "Endpoint",
