@@ -201,6 +201,15 @@
     "root_folder_path": "Root folder path",
     "username": "Username"
   },
+  "Dropbox": {
+    "client_id": "Client id",
+    "client_id-tips": "Keep it empty if you don't have one",
+    "client_secret": "Client secret",
+    "client_secret-tips": "Keep it empty if you don't have one",
+    "oauth_token_url": "Oauth token url",
+    "refresh_token": "Refresh token",
+    "root_folder_path": "Root folder path"
+  },
   "FTP": {
     "address": "Address",
     "password": "Password",
@@ -275,6 +284,25 @@
   "Mega_nz": {
     "email": "Email",
     "password": "Password"
+  },
+  "MoPan": {
+    "cloud_id": "Cloud id",
+    "device_info": "Device info",
+    "order_by": "Order by",
+    "order_bys": {
+      "filename": "Filename",
+      "filesize": "Filesize",
+      "lastOpTime": "LastOpTime"
+    },
+    "order_direction": "Order direction",
+    "order_directions": {
+      "asc": "Asc",
+      "desc": "Desc"
+    },
+    "password": "Password",
+    "phone": "Phone",
+    "root_folder_id": "Root folder id",
+    "root_folder_id-tips": "be careful when using the -11 value, some operations may cause system errors"
   },
   "Onedrive": {
     "chunk_size": "Chunk size",
@@ -514,6 +542,22 @@
       "sharepoint": "Sharepoint"
     }
   },
+  "WoPan": {
+    "access_token": "Access token",
+    "family_id": "Family id",
+    "family_id-tips": "Keep it empty if you want to use your personal drive",
+    "refresh_token": "Refresh token",
+    "root_folder_id": "Root folder id",
+    "sort_rule": "Sort rule",
+    "sort_rules": {
+      "name_asc": "Name asc",
+      "name_desc": "Name desc",
+      "size_asc": "Size asc",
+      "size_desc": "Size desc",
+      "time_asc": "Time asc",
+      "time_desc": "Time desc"
+    }
+  },
   "YandexDisk": {
     "client_id": "Client id",
     "client_secret": "Client secret",
@@ -553,6 +597,7 @@
     "BaiduPhoto": {},
     "BaiduShare": {},
     "Cloudreve": {},
+    "Dropbox": {},
     "FTP": {},
     "GoogleDrive": {},
     "GooglePhoto": {},
@@ -561,6 +606,9 @@
     "Local": {},
     "MediaTrack": {},
     "Mega_nz": {},
+    "MoPan": {
+      "alert": "This network disk may store your password in clear text. Please set your password carefully"
+    },
     "Onedrive": {},
     "OnedriveAPP": {},
     "PikPak": {},
@@ -580,6 +628,7 @@
     "UrlTree": {},
     "Virtual": {},
     "WebDav": {},
+    "WoPan": {},
     "YandexDisk": {}
   },
   "drivers": {
@@ -598,6 +647,7 @@
     "BaiduPhoto": "BaiduPhoto",
     "BaiduShare": "BaiduShare",
     "Cloudreve": "Cloudreve",
+    "Dropbox": "Dropbox",
     "FTP": "FTP",
     "GoogleDrive": "GoogleDrive",
     "GooglePhoto": "GooglePhoto",
@@ -606,6 +656,7 @@
     "Local": "Local",
     "MediaTrack": "MediaTrack",
     "Mega_nz": "Mega nz",
+    "MoPan": "MoPan",
     "Onedrive": "Onedrive",
     "OnedriveAPP": "OnedriveAPP",
     "PikPak": "PikPak",
@@ -625,6 +676,7 @@
     "UrlTree": "UrlTree",
     "Virtual": "Virtual",
     "WebDav": "WebDav",
+    "WoPan": "WoPan",
     "YandexDisk": "YandexDisk"
   }
 }
