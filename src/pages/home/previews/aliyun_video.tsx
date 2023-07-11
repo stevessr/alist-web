@@ -1,5 +1,5 @@
-import { Box, VStack } from "@hope-ui/solid"
-import { onCleanup, onMount } from "solid-js"
+import { Box } from "@hope-ui/solid"
+import { createSignal, onCleanup, onMount } from "solid-js"
 import { useRouter, useLink, useFetch } from "~/hooks"
 import { getSettingBool, objStore, password } from "~/store"
 import { ObjType, PResp } from "~/types"
@@ -39,7 +39,7 @@ export interface Meta {
 }
 
 const Preview = () => {
-  const { replace } = useRouter()
+  const { replace, pathname } = useRouter()
   const { proxyLink } = useLink()
   let videos = objStore.objs.filter((obj) => obj.type === ObjType.VIDEO)
   if (videos.length === 0) {
@@ -47,7 +47,7 @@ const Preview = () => {
   }
   let player: Artplayer
   let option: any = {
-    id: "player",
+    id: pathname(),
     container: "#video-player",
     title: objStore.obj.name,
     volume: 0.5,
@@ -139,7 +139,6 @@ const Preview = () => {
       }),
     ]
   }
-  const { pathname } = useRouter()
   const [loading, post] = useFetch(
     (): PResp<Data> =>
       r.post("/fs/other", {
@@ -169,6 +168,7 @@ const Preview = () => {
       })
       player = new Artplayer(option)
       player.on("video:ended", () => {
+        if (!autoNext()) return
         const index = videos.findIndex((f) => f.name === objStore.obj.name)
         if (index < videos.length - 1) {
           replace(videos[index + 1].name)
@@ -185,8 +185,9 @@ const Preview = () => {
   onCleanup(() => {
     player?.destroy()
   })
+  const [autoNext, setAutoNext] = createSignal()
   return (
-    <VideoBox>
+    <VideoBox onAutoNextChange={setAutoNext}>
       <Box w="$full" h="60vh" id="video-player" />
     </VideoBox>
   )
