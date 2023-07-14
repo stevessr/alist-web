@@ -9,10 +9,10 @@
   "description": "The front end of Alist V3",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alist-org/alist-web.git"
+    "url": "git+https://github.com/stevessr/alist-web.git"
   },
   "bugs": {
-    "url": "https://github.com/alist-org/alist/issues"
+    "url": "https://github.com/stevessr/alist/issues"
   },
   "files": [
     "dist"
