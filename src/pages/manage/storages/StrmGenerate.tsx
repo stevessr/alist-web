@@ -11,7 +11,7 @@ import {
   Text,
   VStack,
 } from "@hope-ui/solid"
-import { createSignal, onCleanup, Show } from "solid-js"
+import { createSignal, onCleanup } from "solid-js"
 import { useT } from "~/hooks"
 import { r, notify, handleResp } from "~/utils"
 
@@ -22,14 +22,18 @@ export type StrmGenerateButtonProps = {
 }
 
 type TaskInfo = { id: string; progress: number; state: number; error: string }
+type Status = "idle" | "running" | "done" | "failed"
 
 export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
   const t = useT()
   const [opened, setOpened] = createSignal(false)
   const [progress, setProgress] = createSignal(0)
-  const [running, setRunning] = createSignal(false)
+  const [status, setStatus] = createSignal<Status>("idle")
   const [err, setErr] = createSignal("")
   let timer: ReturnType<typeof setInterval> | undefined
+  // generation increments on every start/close/cleanup so any in-flight request
+  // or interval tick that resolves late can detect it is stale and bail out.
+  let generation = 0
 
   const stop = () => {
     if (timer) {
@@ -37,47 +41,83 @@ export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
       timer = undefined
     }
   }
-  onCleanup(stop)
+  onCleanup(() => {
+    generation++
+    stop()
+  })
 
-  const poll = (tid: string) => {
+  const fail = (msg: string) => {
+    stop()
+    setStatus("failed")
+    setErr(msg)
+  }
+
+  const poll = (gen: number, tid: string) => {
     stop()
     timer = setInterval(async () => {
       const resp = await r.post(`/admin/task/strm_generate/info?tid=${tid}`)
-      handleResp(resp, (info: TaskInfo) => {
-        if (info.error) {
-          stop()
-          setRunning(false)
-          setErr(info.error)
-          return
-        }
-        setProgress(Math.floor(info.progress))
-        if (info.progress >= 100) {
-          stop()
-          setRunning(false)
-          notify.success(t("global.generate_strm_done"))
-        }
-      })
+      if (gen !== generation) return
+      handleResp(
+        resp,
+        (info: TaskInfo) => {
+          if (gen !== generation) return
+          if (info.error) {
+            fail(info.error)
+            return
+          }
+          setProgress(Math.floor(info.progress))
+          if (info.progress >= 100) {
+            stop()
+            setStatus("done")
+            notify.success(t("global.generate_strm_done"))
+          }
+        },
+        (msg: string) => {
+          if (gen === generation) fail(msg)
+        },
+      )
     }, 1000)
   }
 
   const start = async () => {
+    stop()
+    const gen = ++generation
     setOpened(true)
-    setRunning(true)
+    setStatus("running")
     setProgress(0)
     setErr("")
     const resp = await r.post("/admin/strm/generate", { path: props.path })
-    handleResp(resp, (data: { task: TaskInfo }) => {
-      notify.info(t("global.generate_strm_start"))
-      poll(data.task.id)
-    })
-    if ((resp as any).code !== 200) {
-      setRunning(false)
-    }
+    if (gen !== generation) return
+    handleResp(
+      resp,
+      (data: { task: TaskInfo }) => {
+        if (gen !== generation) return
+        notify.info(t("global.generate_strm_start"))
+        poll(gen, data.task.id)
+      },
+      (msg: string) => {
+        if (gen === generation) fail(msg)
+      },
+    )
   }
 
   const close = () => {
+    generation++
     stop()
     setOpened(false)
+  }
+
+  const statusText = () => {
+    switch (status()) {
+      case "failed":
+        return t("global.generate_strm_failed") + ": " + err()
+      case "done":
+        return t("global.generate_strm_done")
+      case "running":
+        return t("global.generate_strm_progress") + " " + progress() + "%"
+      default:
+        return ""
+    }
   }
 
   return (
@@ -98,19 +138,7 @@ export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
               <Progress value={progress()} trackColor="$neutral4">
                 <ProgressIndicator color="$success9" />
               </Progress>
-              <Text>
-                <Show
-                  when={!err()}
-                  fallback={t("global.generate_strm_failed") + ": " + err()}
-                >
-                  {running()
-                    ? t("global.generate_strm_progress") +
-                      " " +
-                      progress() +
-                      "%"
-                    : t("global.generate_strm_done")}
-                </Show>
-              </Text>
+              <Text>{statusText()}</Text>
             </VStack>
           </ModalBody>
           <ModalFooter>
