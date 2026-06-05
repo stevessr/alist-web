@@ -32,5 +32,10 @@
   "name": "Name",
   "refresh_success": "Refresh successfully",
   "refresh_failed": "Refresh failed",
-  "required": "required"
+  "required": "required",
+  "generate_strm": "Generate Strm",
+  "generate_strm_start": "Generation started",
+  "generate_strm_progress": "Generating Strm...",
+  "generate_strm_done": "Strm generated",
+  "generate_strm_failed": "Generation failed"
 }
