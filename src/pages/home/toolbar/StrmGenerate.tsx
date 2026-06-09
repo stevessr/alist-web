@@ -1,7 +1,9 @@
 import { Show } from "solid-js"
+import { TbFileExport } from "solid-icons/tb"
 import { useRouter } from "~/hooks"
 import { me, objStore } from "~/store"
-import { StrmGenerateButton } from "~/pages/manage/storages/StrmGenerate"
+import { StrmGenerate } from "~/pages/manage/storages/StrmGenerate"
+import { RightIcon } from "./Icon"
 
 export const ToolbarStrmGenerate = () => {
   const { pathname } = useRouter()
@@ -9,7 +11,11 @@ export const ToolbarStrmGenerate = () => {
   const isStrm = () => objStore.provider === "Strm"
   return (
     <Show when={isAdmin() && isStrm()}>
-      <StrmGenerateButton path={pathname()} />
+      <StrmGenerate path={pathname()}>
+        {({ start }) => (
+          <RightIcon as={TbFileExport} tips="generate_strm" onClick={start} />
+        )}
+      </StrmGenerate>
     </Show>
   )
 }

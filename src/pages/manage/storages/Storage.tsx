@@ -69,7 +69,7 @@ function StorageOp(props: StorageProps) {
         }}
       />
       <Show when={props.storage.driver === "Strm"}>
-        <StrmGenerateButton path={props.storage.mount_path} size="sm" />
+        <StrmGenerateButton path={props.storage.mount_path} />
       </Show>
     </>
   )

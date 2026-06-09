@@ -11,9 +11,20 @@ import {
   Text,
   VStack,
 } from "@hope-ui/solid"
-import { createSignal, onCleanup } from "solid-js"
+import { createSignal, JSX, onCleanup, Show } from "solid-js"
 import { useT } from "~/hooks"
 import { r, notify, handleResp } from "~/utils"
+
+type TaskInfo = { id: string; progress: number; state: number; error: string }
+type Status = "idle" | "running" | "done" | "failed"
+
+export type StrmGenerateProps = {
+  path: string
+  // render-prop trigger: receives `start` to kick off generation. Lets callers
+  // render either a Button (storages page) or a toolbar icon while sharing the
+  // progress dialog + polling logic below.
+  children: (api: { start: () => void }) => JSX.Element
+}
 
 export type StrmGenerateButtonProps = {
   path: string
@@ -21,10 +32,7 @@ export type StrmGenerateButtonProps = {
   colorScheme?: string
 }
 
-type TaskInfo = { id: string; progress: number; state: number; error: string }
-type Status = "idle" | "running" | "done" | "failed"
-
-export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
+export const StrmGenerate = (props: StrmGenerateProps) => {
   const t = useT()
   const [opened, setOpened] = createSignal(false)
   const [progress, setProgress] = createSignal(0)
@@ -101,11 +109,20 @@ export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
     )
   }
 
+  // hide just closes the foreground window; the backend task keeps running and
+  // polling continues, so the success toast still fires and progress stays
+  // visible in the task center.
+  const hide = () => setOpened(false)
+
+  // close is used once the task reached a terminal state: stop polling and reset.
   const close = () => {
     generation++
     stop()
     setOpened(false)
   }
+
+  const isRunning = () => status() === "running"
+  const dismiss = () => (isRunning() ? hide() : close())
 
   const statusText = () => {
     switch (status()) {
@@ -122,14 +139,8 @@ export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
 
   return (
     <>
-      <Button
-        size={props.size ?? "sm"}
-        colorScheme={(props.colorScheme as any) ?? "accent"}
-        onClick={start}
-      >
-        {t("global.generate_strm")}
-      </Button>
-      <Modal opened={opened()} onClose={close} blockScrollOnMount={false}>
+      {props.children({ start })}
+      <Modal opened={opened()} onClose={dismiss} blockScrollOnMount={false}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{t("global.generate_strm")}</ModalHeader>
@@ -139,15 +150,37 @@ export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
                 <ProgressIndicator color="$success9" />
               </Progress>
               <Text>{statusText()}</Text>
+              <Show when={isRunning()}>
+                <Text size="sm" color="$neutral10">
+                  {t("global.generate_strm_background")}
+                </Text>
+              </Show>
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="neutral" onClick={close}>
-              {t("global.close")}
+            <Button colorScheme="neutral" onClick={dismiss}>
+              {isRunning() ? t("global.generate_strm_hide") : t("global.close")}
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
+  )
+}
+
+export const StrmGenerateButton = (props: StrmGenerateButtonProps) => {
+  const t = useT()
+  return (
+    <StrmGenerate path={props.path}>
+      {({ start }) => (
+        <Button
+          size={props.size}
+          colorScheme={(props.colorScheme as any) ?? "accent"}
+          onClick={start}
+        >
+          {t("global.generate_strm")}
+        </Button>
+      )}
+    </StrmGenerate>
   )
 }
