@@ -96,9 +96,14 @@
   },
   "139Yun": {
     "authorization": "Authorization",
+    "authorization-tips": "Authorization can be used alone. If empty, use mail_cookies alone for fast login, or mail_cookies + username + password for full login fallback.",
     "cloud_id": "Cloud id",
     "custom_upload_part_size": "Custom upload part size",
     "link_id": "Link id",
+    "mail_cookies": "Mail cookies",
+    "mail_cookies-tips": "Cookies from mail.10086.cn. Can be used alone for fast login, or with username and password for full login fallback.",
+    "password": "Password",
+    "password-tips": "Required only when using password login fallback with mail_cookies.",
     "report_real_size": "Report real size",
     "root_folder_id": "Root folder id",
     "type": "Type",
@@ -109,7 +114,11 @@
       "personal_new": "Personal new",
       "share": "Share"
     },
-    "use_large_thumbnail": "Use large thumbnail"
+    "use_large_thumbnail": "Use large thumbnail",
+    "user_domain_id": "User domain id",
+    "user_domain_id-tips": "ud_id in Cookie, fill in to show disk usage",
+    "username": "Username",
+    "username-tips": "Required only when using password login fallback with mail_cookies."
   },
   "189Cloud": {
     "cookie": "Cookie",
