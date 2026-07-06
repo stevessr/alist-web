@@ -1067,6 +1067,22 @@
     "root_folder_path": "Root folder path",
     "username": "Username"
   },
+  "SJTUNetdisk": {
+    "keep_alive": "Keep alive",
+    "order_by": "Order by",
+    "order_by_type": "Order by type",
+    "order_by_types": {
+      "asc": "Asc",
+      "desc": "Desc"
+    },
+    "order_bys": {
+      "modificationTime": "ModificationTime",
+      "name": "Name",
+      "size": "Size"
+    },
+    "user_id": "User id",
+    "user_token": "User token"
+  },
   "SMB": {
     "address": "Address",
     "password": "Password",
@@ -1548,6 +1564,7 @@
     "Quqi": {},
     "S3": {},
     "SFTP": {},
+    "SJTUNetdisk": {},
     "SMB": {},
     "Seafile": {},
     "Streamtape": {
@@ -1647,6 +1664,7 @@
     "Quqi": "Quqi",
     "S3": "S3",
     "SFTP": "SFTP",
+    "SJTUNetdisk": "SJTUNetdisk",
     "SMB": "SMB",
     "Seafile": "Seafile",
     "Streamtape": "Streamtape",
