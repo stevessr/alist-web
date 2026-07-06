@@ -1354,6 +1354,8 @@
     "sign_url_expire": "Sign url expire"
   },
   "UrlTree": {
+    "download_params": "Download params",
+    "download_params-tips": "Extra query parameters appended to the URL on download (not on preview). Magic variables: {{.Name}} {{.Path}} {{.Size}} {{.Modified}}; values are URL-encoded automatically. e.g. attname={{.Name}}",
     "head_size": "Head size",
     "head_size-tips": "Use head method to get file size, but it may be failed.",
     "url_structure": "Url structure",
