@@ -581,6 +581,13 @@
     "refresh_token": "Refresh token",
     "root_folder_path": "Root folder path"
   },
+  "Emby": {
+    "address": "Address",
+    "address-tips": "Emby/Jellyfin server address, e.g. http://192.168.1.1:8096",
+    "password": "Password",
+    "root_folder_id": "Root folder id",
+    "username": "Username"
+  },
   "FTP": {
     "address": "Address",
     "encoding": "Encoding",
@@ -952,9 +959,28 @@
     "tenant_id": "Tenant id"
   },
   "PikPak": {
+    "api_domain": "Api domain",
+    "api_domains": {
+      "mypikpak_com": "Mypikpak com",
+      "mypikpak_net": "Mypikpak net",
+      "pikpak_me": "Pikpak me",
+      "pikpakdrive_com": "Pikpakdrive com"
+    },
     "captcha_token": "Captcha token",
+    "custom_api_domain": "Custom api domain",
+    "custom_api_domain-tips": "Custom PikPak API domain (e.g. mypikpak.net). When set, it overrides the selected api_domain.",
+    "custom_download_domain": "Custom download domain",
+    "custom_download_domain-tips": "Custom domain to rewrite the download/play link host to (e.g. mypikpak.net). When set, it overrides the selected download_domain. Keep 'original' (and empty) to leave the link unchanged.",
     "device_id": "Device id",
     "disable_media_link": "Disable media link",
+    "download_domain": "Download domain",
+    "download_domains": {
+      "mypikpak_com": "Mypikpak com",
+      "mypikpak_net": "Mypikpak net",
+      "original": "Original",
+      "pikpak_me": "Pikpak me",
+      "pikpakdrive_com": "Pikpakdrive com"
+    },
     "password": "Password",
     "platform": "Platform",
     "platforms": {
@@ -1524,6 +1550,9 @@
     "DoubaoNew": {},
     "DoubaoShare": {},
     "Dropbox": {},
+    "Emby": {
+      "alert": "Direct links contain your Emby access token. Enable proxy for this storage if it is shared publicly."
+    },
     "FTP": {},
     "FTPS": {},
     "FebBox": {},
@@ -1628,6 +1657,7 @@
     "DoubaoNew": "DoubaoNew",
     "DoubaoShare": "DoubaoShare",
     "Dropbox": "Dropbox",
+    "Emby": "Emby",
     "FTP": "FTP",
     "FTPS": "FTPS",
     "FebBox": "FebBox",

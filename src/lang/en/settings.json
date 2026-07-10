@@ -119,6 +119,7 @@
     "database": "Database",
     "database_non_full_text": "Database non full text",
     "meilisearch": "Meilisearch",
+    "no_index": "No index",
     "none": "None"
   },
   "settings_layout": "Settings layout",
